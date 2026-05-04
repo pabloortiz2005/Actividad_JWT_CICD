@@ -4,66 +4,62 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Director;
+use Illuminate\Http\JsonResponse;
 
 class DirectorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(): JsonResponse
     {
-        //
         $directores = Director::all();
-        
-        return view('director.index',['header' => collect(['Nombre', 'Apellido', 'Fecha nacimiento']), 'tableData' => collect([1,2])]);
-        //return view(''); //TODO: Crear vista con componente tipo tabla que muestre todos los directores, y un enlace a la página de cada uno de ellos.
+        return response()->json($directores, 200);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function store(Request $request): JsonResponse
     {
-        //
+        //Validación y almacenamiento
+        $validated = $request->validate([
+            'nombre'           => 'required|string|max:255',
+            'apellido'         => 'required|string|max:255',
+            'fecha_nacimiento' => 'required|date',
+        ]);
+
+        $director = Director::create($validated);
+        return response()->json($director, 201);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function show(string $id): JsonResponse
     {
-        //
+        //Carga la relación peliculas definida en el modelo
+        $director = Director::with('peliculas')->find($id);
+
+        if (!$director) {
+            return response()->json(['message' => 'Director no encontrado'], 404);
+        }
+
+        return response()->json($director, 200);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    public function update(Request $request, string $id): JsonResponse
     {
-        //
+        $director = Director::find($id);
+
+        if (!$director) {
+            return response()->json(['message' => 'Director no encontrado'], 404);
+        }
+
+        $director->update($request->all());
+        return response()->json($director, 200);
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    public function destroy(string $id): JsonResponse
     {
-        //
-    }
+        $director = Director::find($id);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
+        if (!$director) {
+            return response()->json(['message' => 'Director no encontrado'], 404);
+        }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        $director->delete();
+        return response()->json(['message' => 'Director eliminado correctamente'], 200);
     }
 }
