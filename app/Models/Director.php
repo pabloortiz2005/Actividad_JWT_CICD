@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Director extends Model
 {
-    protected $fillable = ['nombre', 'apellido', 'fecha_nacimiento'];
+    protected $fillable = ['name', 'surname', 'birthdate'];
 
    
     protected $hidden = ['updated_at', 'created_at'];

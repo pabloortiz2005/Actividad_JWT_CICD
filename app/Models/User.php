@@ -30,9 +30,9 @@ class User extends Authenticatable implements JWTSubject // IMPLEMENTAMOS la int
         ];
     }
 
-    // -------------------------------------------------------------------------
+    
     // MÉTODOS OBLIGATORIOS PARA JWT
-    // -------------------------------------------------------------------------
+  
 
     /**
      * Obtiene el identificador que se guardará en el "subject" del JWT.

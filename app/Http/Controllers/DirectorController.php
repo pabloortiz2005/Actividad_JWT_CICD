@@ -17,10 +17,11 @@ class DirectorController extends Controller
     public function store(Request $request): JsonResponse
     {
         //Validación y almacenamiento
+       // En DirectorController.php
         $validated = $request->validate([
-            'nombre'           => 'required|string|max:255',
-            'apellido'         => 'required|string|max:255',
-            'fecha_nacimiento' => 'required|date',
+            'name'      => 'required|string|max:255',
+            'surname'   => 'required|string|max:255',
+            'birthdate' => 'required|date',
         ]);
 
         $director = Director::create($validated);

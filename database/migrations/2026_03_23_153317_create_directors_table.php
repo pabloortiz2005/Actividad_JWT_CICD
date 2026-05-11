@@ -10,9 +10,9 @@ return new class extends Migration
     {
         Schema::create('directors', function (Blueprint $table) {
             $table->id();
-            $table->string('nombre');
-            $table->string('apellido');
-            $table->date('fecha_nacimiento');
+            $table->string('name');
+            $table->string('surname');
+            $table->date('birthdate');
             $table->timestamps();
         });
     }
