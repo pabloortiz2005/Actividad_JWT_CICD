@@ -1,0 +1,21 @@
+{
+    "name": "Laravel PeliculApp Pablo",
+"image": "mcr.microsoft.com/devcontainers/php:8.4",
+"customizations": {
+        "vscode": {
+            "extensions": [
+                "bmewburn.vscode-intelephense-client",
+                "onecentlin.laravel-extension-pack",
+                "ms-azuretools.vscode-docker",
+                "eamodio.gitlens"
+            ]
+        }
+    },
+    "remoteEnv": {
+        "APP_ENV": "local",
+        "APP_DEBUG": "true",
+        "DB_CONNECTION": "sqlite",
+        "DB_DATABASE": ":memory:"
+    },
+    "postCreateCommand": "cp .env.example .env && composer install && php artisan key:generate && php artisan jwt:secret --force"
+}
