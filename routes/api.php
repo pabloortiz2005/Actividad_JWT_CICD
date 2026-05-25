@@ -25,6 +25,9 @@ Route::post('login', [AuthController::class, 'login']);
     // CRUD completo de Películas (Será: /api/peliculas)
     Route::resource('peliculas', PeliculaController::class);
     
+    Route::post('refresh', [AuthController::class, 'refresh']);
+    Route::get('me', [AuthController::class, 'me']);
+    
     // Cerrar sesión
     Route::post('logout', [AuthController::class, 'logout']);
 });
