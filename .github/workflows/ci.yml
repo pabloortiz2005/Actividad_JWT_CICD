@@ -10,8 +10,6 @@ permissions:
   contents: read
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
 
   test:
     runs-on: ubuntu-latest
