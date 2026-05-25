@@ -20,8 +20,14 @@ jobs:
           php-version: '8.4'
           extensions: json, dom, curl, libxml, mbstring, sqlite3
 
+      - name: Prepare Environment
+        run: cp .env.example .env
+
       - name: Install Dependencies
         run: composer install --no-ansi --no-interaction --no-scripts --no-progress --prefer-dist
+
+      - name: Generate Application Key
+        run: php artisan key:generate
 
       - name: Execute Tests
         run: php artisan test
