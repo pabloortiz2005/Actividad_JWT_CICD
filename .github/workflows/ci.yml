@@ -10,20 +10,8 @@ permissions:
   contents: read
 
 jobs:
-  lint:
+  test:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v4
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
-        with:
-          php-version: '8.3'
-          extensions: json, dom, curl, libxml, mbstring
-
-      - name: Check Code Style (Pint)
-        run: vendor/bin/pint --test
 
   test:
     runs-on: ubuntu-latest
